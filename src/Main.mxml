@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="creationCompleteHandler()">
+    <fx:Script><![CDATA[
+        private var win:HideWindow;
+        private var primaryScreen:Screen;
+        private var secondaryScreen:Screen;
+
+        private function creationCompleteHandler():void {
+            win = new HideWindow();
+            win.type = NativeWindowType.LIGHTWEIGHT;
+            win.open();
+            this.primaryScreen = Screen.mainScreen;
+            this.secondaryScreen = Screen.screens[1];
+        }
+
+        private function moveToSecondaryScreen():void {
+            this.win.nativeWindow.x = secondaryScreen.bounds.x;
+            this.win.nativeWindow.y = secondaryScreen.bounds.y;
+            this.win.nativeWindow.width = secondaryScreen.bounds.width;
+            this.win.nativeWindow.height = secondaryScreen.bounds.height;
+        }
+
+        private function resizeToFitSecondaryScreen():void {
+            trace("contentScaleFactor of HideWindow is: " + win.nativeWindow.stage.contentsScaleFactor);
+            this.win.nativeWindow.x = secondaryScreen.bounds.x / this.win.stage.contentsScaleFactor ;
+            this.win.nativeWindow.y = secondaryScreen.bounds.y / this.win.stage.contentsScaleFactor ;
+            this.win.nativeWindow.width = secondaryScreen.bounds.width / this.win.stage.contentsScaleFactor ;
+            this.win.nativeWindow.height = secondaryScreen.bounds.height / this.win.stage.contentsScaleFactor;
+        }
+
+        private function moveBackToPrimaryScreen():void {
+            this.win.nativeWindow.x = primaryScreen.bounds.x;
+            this.win.nativeWindow.y = primaryScreen.bounds.y;
+        }
+
+        private function traceHideWindowBoundsAndContentScaleFactor():void {
+            trace("stage.contentsScaleFactor: " + this.win.stage.contentsScaleFactor);
+            trace("nativeWindow.x: " + this.win.nativeWindow.x);
+            trace("nativeWindow.y: " + this.win.nativeWindow.y);
+            trace("nativeWindow.width: " + this.win.nativeWindow.width);
+            trace("nativeWindow.height: " + this.win.nativeWindow.height);
+
+        }
+        ]]></fx:Script>
+
+        <s:Button label="1 - moveToSecondaryScreen" click="moveToSecondaryScreen()"/>
+        <s:Button label="2 - resizeToFitSecondaryScreen" click="resizeToFitSecondaryScreen()" top="50"/>
+        <s:Button label="3 - moveBackToPrimaryScreen" click="moveBackToPrimaryScreen()" top="100"/>
+        <s:Button label="traceHideWindowBoundsAndContentScaleFactor" click="traceHideWindowBoundsAndContentScaleFactor()" top="150"/>
+
+</s:WindowedApplication>
