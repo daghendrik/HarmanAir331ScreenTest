@@ -14,6 +14,7 @@
         }
 
         private function moveToSecondaryScreen():void {
+            trace("contentScaleFactor of HideWindow BEFORE move is: " + win.nativeWindow.stage.contentsScaleFactor);
             this.win.nativeWindow.x = secondaryScreen.bounds.x;
             this.win.nativeWindow.y = secondaryScreen.bounds.y;
             this.win.nativeWindow.width = secondaryScreen.bounds.width;
@@ -21,7 +22,7 @@
         }
 
         private function resizeToFitSecondaryScreen():void {
-            trace("contentScaleFactor of HideWindow is: " + win.nativeWindow.stage.contentsScaleFactor);
+            trace("contentScaleFactor of HideWindow AFTER move is: " + win.nativeWindow.stage.contentsScaleFactor);
             this.win.nativeWindow.x = secondaryScreen.bounds.x / this.win.stage.contentsScaleFactor ;
             this.win.nativeWindow.y = secondaryScreen.bounds.y / this.win.stage.contentsScaleFactor ;
             this.win.nativeWindow.width = secondaryScreen.bounds.width / this.win.stage.contentsScaleFactor ;
@@ -34,7 +35,20 @@
         }
 
         private function traceHideWindowBoundsAndContentScaleFactor():void {
-            trace("stage.contentsScaleFactor: " + this.win.stage.contentsScaleFactor);
+
+            trace("this.nativeWindow.stage.contentsScaleFactor: " + this.nativeWindow.stage.contentsScaleFactor);
+            trace("this.primaryScreen.bounds.x: " + this.primaryScreen.bounds.x);
+            trace("this.primaryScreen.bounds.y: " + this.primaryScreen.bounds.y);
+            trace("this.primaryScreen.bounds.width: " + this.primaryScreen.bounds.width);
+            trace("this.primaryScreen.bounds.height: " + this.primaryScreen.bounds.height);
+
+
+            trace("this.secondaryScreen.bounds.x: " + this.secondaryScreen.bounds.x);
+            trace("this.secondaryScreen.bounds.y: " + this.secondaryScreen.bounds.y);
+            trace("this.secondaryScreen.bounds.width: " + this.secondaryScreen.bounds.width);
+            trace("this.secondaryScreen.bounds.height: " + this.secondaryScreen.bounds.height);
+
+            trace("win.nativeWindow.stage.contentsScaleFactor: " + this.win.nativeWindow.stage.contentsScaleFactor);
             trace("nativeWindow.x: " + this.win.nativeWindow.x);
             trace("nativeWindow.y: " + this.win.nativeWindow.y);
             trace("nativeWindow.width: " + this.win.nativeWindow.width);
